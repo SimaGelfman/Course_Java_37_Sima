@@ -26,8 +26,8 @@ public class Rectangle {
 		return a;
 	}
 
-	public double area(Rectangle r){
-		return r.getA () * r.getB ();
+	public double area( ){
+		return this.a * this.b;
 	}
 
 	public double getB () {

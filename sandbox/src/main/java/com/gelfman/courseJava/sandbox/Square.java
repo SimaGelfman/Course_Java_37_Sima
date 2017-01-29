@@ -12,8 +12,8 @@ public class Square {
 		this.l = l;
 	}
 
-	public double area( Square s){
-		return s.getL () *s.getL ();
+	public double area( ){
+		return this.l * this.l;
 	}
 
 	public void setL ( double l ) {
