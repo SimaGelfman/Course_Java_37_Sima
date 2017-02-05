@@ -8,8 +8,7 @@ import org.testng.annotations.Test;
  */
 public class PointTests {
 
-	@Test
-	public void destanceTests() {
+	@Test	public void destanceTests() {
 
 		Point p1 = new Point ( 2, 0 );
 		Point p2 = new Point ( 0, 0 );
