@@ -1,5 +1,6 @@
-package com.gelfman.courseJava.adressbook;
+package com.gelfman.courseJava.adressbook.tests;
 
+import com.gelfman.courseJava.adressbook.model.ContactData;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;

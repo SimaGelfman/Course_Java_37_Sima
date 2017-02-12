@@ -1,4 +1,4 @@
-package com.gelfman.courseJava.adressbook;
+package com.gelfman.courseJava.adressbook.model;
 
 public class ContactData {
 	private final String firstName;
