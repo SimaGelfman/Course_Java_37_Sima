@@ -24,6 +24,10 @@ public class HelperBased {
 		wd.findElement(locator).sendKeys( text );
 	}
 
+	protected void closeAlertWindow(){
+		wd.switchTo().alert().accept();
+	}
+
 	public  boolean isAlertPresent() {
 		try {
 			wd.switchTo().alert();
