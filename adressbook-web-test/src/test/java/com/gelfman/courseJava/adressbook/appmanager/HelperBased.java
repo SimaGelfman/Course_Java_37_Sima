@@ -2,15 +2,16 @@ package com.gelfman.courseJava.adressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by Sima.Gelfman on 2/12/2017.
  */
 public class HelperBased {
-	protected FirefoxDriver wd;
+	protected WebDriver wd;
 
-	public HelperBased ( FirefoxDriver wd ) {
+	public HelperBased ( WebDriver wd ) {
 		this.wd = wd;
 	}
 

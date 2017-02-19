@@ -1,6 +1,7 @@
 package com.gelfman.courseJava.adressbook.tests;
 
 import com.gelfman.courseJava.adressbook.appmanager.ApplicationManager;
+import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -9,7 +10,7 @@ import org.testng.annotations.BeforeMethod;
  */
 public class TestBased {
 
-	protected final ApplicationManager app = new ApplicationManager ();
+	protected final ApplicationManager app = new ApplicationManager ( BrowserType.IE);
 
 	@BeforeMethod
 	public void setUp () throws Exception {
