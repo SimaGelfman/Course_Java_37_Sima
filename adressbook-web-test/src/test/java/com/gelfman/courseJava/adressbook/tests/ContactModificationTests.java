@@ -11,8 +11,7 @@ public class ContactModificationTests extends TestBased {
 	public void testContactModification(){
 		app.getContactHelper ().selectSomeContact ();
 		app.getContactHelper ().initContactModification ();
-		app.getContactHelper ().fillContactForm ( new ContactData ( "aa", "bbb", "ccc", "ddd", "ee", "FF", "GG", null, null, null, null,
-																												null, null, null, null) );
+		app.getContactHelper ().fillContactForm ( new ContactData ( "aa", "bbb", "ccc", null),false );
 		app.getContactHelper ().submitContactModification ();
 		app.getContactHelper ().returnToHomePage ();
 	}

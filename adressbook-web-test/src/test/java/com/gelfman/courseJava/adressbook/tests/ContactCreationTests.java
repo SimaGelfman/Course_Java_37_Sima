@@ -17,7 +17,7 @@ public class ContactCreationTests extends TestBased{
     public void ContactCreationTests() {
         app.getNavigationMamager ().goToGroupPage ();
         app.getContactHelper ().initContactCreation ();
-        app.getContactHelper ().fillContactForm (  new ContactData ( "Alexandr", "Petrovich", "Kozlov", "AlexanderKozlov", "Doctor", "Time", "Ahilazon 2, Tel-aviv", "+74959919991", "05454545454", "+79499999999", "-", "alexanderkozlov@gmail.com", "Afula", "25", "privet" ) );
+        app.getContactHelper ().fillContactForm (  new ContactData ( "Alexandr", "Petrovich", "Kozlov","test1"), true );
         app.getContactHelper ().submitContactCreation ();
         app.getContactHelper ().returnToHomePage ();
     }

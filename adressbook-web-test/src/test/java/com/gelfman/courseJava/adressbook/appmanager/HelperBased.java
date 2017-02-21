@@ -2,6 +2,7 @@ package com.gelfman.courseJava.adressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -39,6 +40,16 @@ public class HelperBased {
 			wd.switchTo().alert();
 			return true;
 		} catch (NoAlertPresentException e) {
+			return false;
+		}
+	}
+
+	public boolean isElementPresent(By lacator){
+		try{
+			wd.findElement(lacator);
+			return true;
+		}
+		catch (NoSuchElementException e){
 			return false;
 		}
 	}
