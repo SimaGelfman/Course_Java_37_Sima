@@ -9,6 +9,9 @@ import org.testng.annotations.Test;
 public class ContactModificationTests extends TestBased {
 	@Test
 	public void testContactModification(){
+		if(!app.getContactHelper ().isThereAContact()){
+			app.getContactHelper ().createContact(new ContactData ("Petor", "Ilich", "Sergeev", "test1"));
+		}
 		app.getContactHelper ().selectSomeContact ();
 		app.getContactHelper ().initContactModification ();
 		app.getContactHelper ().fillContactForm ( new ContactData ( "aa", "bbb", "ccc", null),false );

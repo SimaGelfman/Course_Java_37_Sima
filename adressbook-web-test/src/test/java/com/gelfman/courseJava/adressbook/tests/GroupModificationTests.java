@@ -11,6 +11,9 @@ public class GroupModificationTests extends TestBased{
 	@Test
 	public void testGroupModification(){
 		app.getNavigationMamager ().goToGroupPage ();
+		if(!app.getGroupHelper ().isThereAGroup ()){
+			app.getGroupHelper ().createGroup ( new GroupData("test1", "test1", "test3" ));
+		}
 		app.getGroupHelper ().selectGroup ();
 		app.getGroupHelper ().initGroupModification();
 		app.getGroupHelper ().fillGroupForm (new GroupData ( "test1", "testChange1", "testChange2") );
