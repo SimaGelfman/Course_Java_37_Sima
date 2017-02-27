@@ -17,39 +17,38 @@ public class HelperBased {
 	}
 
 	protected void click ( By locator ) {
-		wd.findElement( locator ).click();
+		wd.findElement ( locator ).click ();
 	}
 
 	protected void type ( By locator, String text ) {
 		click ( locator );
-		if(text != null) {
+		if (text != null) {
 			String existingText = wd.findElement ( locator ).getAttribute ( "value" );
 			if (!existingText.equals ( text )) {
 				wd.findElement ( locator ).clear ();
 				wd.findElement ( locator ).sendKeys ( text );
 			}
 		}
-		}
-
-	protected void closeAlertWindow(){
-		wd.switchTo().alert().accept();
 	}
 
-	public  boolean isAlertPresent() {
+	protected void closeAlertWindow () {
+		wd.switchTo ().alert ().accept ();
+	}
+
+	public boolean isAlertPresent () {
 		try {
-			wd.switchTo().alert();
+			wd.switchTo ().alert ();
 			return true;
 		} catch (NoAlertPresentException e) {
 			return false;
 		}
 	}
 
-	public boolean isElementPresent(By lacator){
-		try{
-			wd.findElement(lacator);
+	public boolean isElementPresent ( By lacator ) {
+		try {
+			wd.findElement ( lacator );
 			return true;
-		}
-		catch (NoSuchElementException e){
+		} catch (NoSuchElementException e) {
 			return false;
 		}
 	}

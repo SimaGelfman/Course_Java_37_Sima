@@ -15,7 +15,7 @@ public class GroupHelper extends HelperBased {
 	}
 
 	public void returnToGroupPage () {
-		click ( By.linkText("group page") );
+		click ( By.linkText ( "group page" ) );
 	}
 
 	public void submitGroupCreation () {
@@ -24,37 +24,42 @@ public class GroupHelper extends HelperBased {
 
 	public void fillGroupForm ( GroupData groupData ) {
 		type ( By.name ( "group_name" ), groupData.getGroupName () );
-		type ( By.name("group_header"), groupData.getHeader () );
-		type ( By.name("group_footer"), groupData.getFooter () );
+		type ( By.name ( "group_header" ), groupData.getHeader () );
+		type ( By.name ( "group_footer" ), groupData.getFooter () );
 	}
 
 	public void initGroupCreation () {
-		click ( By.name("new") );
+		click ( By.name ( "new" ) );
 	}
 
 	public void deleteSelectedGroups () {
-		click ( By.xpath("//div[@id='content']/form/input[5]") );
+		click ( By.xpath ( "//div[@id='content']/form/input[5]" ) );
 	}
 
-	public void selectGroup () {
-		click ( By.name("selected[]") );
+	public void selectGroup ( int index ) {
+		wd.findElements ( By.name ( "selected[]" ) ).get ( index ).click ();
 	}
 
 	public void initGroupModification () {
-		click ( By.name("edit")  );
-	}
-	public void submitGroupModification(){
-		click ( By.name("update")  );
+		click ( By.name ( "edit" ) );
 	}
 
-	public void createGroup ( GroupData group) {
+	public void submitGroupModification () {
+		click ( By.name ( "update" ) );
+	}
+
+	public void createGroup ( GroupData group ) {
 		initGroupCreation ();
-		fillGroupForm (group);
+		fillGroupForm ( group );
 		submitGroupCreation ();
 		returnToGroupPage ();
 	}
 
 	public boolean isThereAGroup () {
-		return isElementPresent ( By.name("selected[]")  );
+		return isElementPresent ( By.name ( "selected[]" ) );
+	}
+
+	public int getGroupCount () {
+		return wd.findElements ( By.name ( "selected[]" ) ).size ();
 	}
 }

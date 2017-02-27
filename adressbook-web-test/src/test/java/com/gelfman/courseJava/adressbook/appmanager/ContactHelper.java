@@ -40,8 +40,8 @@ public class ContactHelper extends HelperBased{
 		click( By.linkText("add new"));
 	}
 
-	public void selectSomeContact () {
-		click ( By.name ( "selected[]" ) );
+	public void selectSomeContact (int index) {
+		wd.findElements ( By.xpath ( "//table[@id='maintable']/tbody/tr/td[1]/input" ) ).get ( index ).click ( );
 	}
 
 	public void deleteSelectedContact () {
@@ -49,8 +49,8 @@ public class ContactHelper extends HelperBased{
 		closeAlertWindow ();
 	}
 
-	public void initContactModification () {
-		click ( By.xpath ( "//table[@id='maintable']/tbody/tr[2]/td[8]/a/img" ) );
+	public void initContactModification (int index) {
+		wd.findElements ( By.xpath ( "//table[@id='maintable']/tbody/tr/td[8]/a/img" ) ).get ( index ).click ();
 	}
 
 	public void submitContactModification(){
@@ -67,5 +67,9 @@ public class ContactHelper extends HelperBased{
 
 	public boolean isThereAContact () {
 		return isElementPresent(By.name ( "selected[]" ));
+	}
+
+	public int getContactCount () {
+		return wd.findElements ( By.xpath ( "//table[@id='maintable']/tbody/tr/td[1]/input" ) ).size ();
 	}
 }
