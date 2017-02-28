@@ -3,7 +3,11 @@ package com.gelfman.courseJava.adressbook.appmanager;
 import com.gelfman.courseJava.adressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sima.Gelfman on 2/9/2017.
@@ -61,5 +65,15 @@ public class GroupHelper extends HelperBased {
 
 	public int getGroupCount () {
 		return wd.findElements ( By.name ( "selected[]" ) ).size ();
+	}
+
+	public List<GroupData> getGroupList () {
+		List<GroupData> groups =  new ArrayList<GroupData> (  );
+		List<WebElement> elements = wd.findElements ( By.cssSelector ( "span.group" ) );
+		for(WebElement element: elements){
+			String name = element.getText ();
+			groups.add(new GroupData ( name, null, null ));
+		}
+		return groups;
 	}
 }
