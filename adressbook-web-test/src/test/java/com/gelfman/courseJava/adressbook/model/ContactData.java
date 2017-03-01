@@ -1,29 +1,18 @@
 package com.gelfman.courseJava.adressbook.model;
 
 public class ContactData {
-	private final String id;
+	private int id;
 	private final String firstName;
 	private final String middlename;
 	private final String lastName;
 	private String group;
 
-	public ContactData ( String id, String firstName, String middlename, String lastName, String group ) {
+	public ContactData ( int id, String firstName, String middlename, String lastName, String group ) {
 		this.id = id;
 		this.firstName = firstName;
 		this.middlename = middlename;
 		this.lastName = lastName;
 		this.group = group;
-	}
-
-	public ContactData ( String firstName, String middlename, String lastName, String group ) {
-		this.id = null;
-		this.firstName = firstName;
-		this.middlename = middlename;
-		this.lastName = lastName;
-		this.group = group;
-	}
-	public String getGroup () {
-		return group;
 	}
 
 	@Override
@@ -33,7 +22,6 @@ public class ContactData {
 
 		ContactData that = (ContactData) o;
 
-		if (getId () != null ? !getId ().equals ( that.getId () ) : that.getId () != null) return false;
 		if (getFirstName () != null ? !getFirstName ().equals ( that.getFirstName () ) : that.getFirstName () != null)
 			return false;
 		return getLastName () != null ? getLastName ().equals ( that.getLastName () ) : that.getLastName () == null;
@@ -42,10 +30,20 @@ public class ContactData {
 
 	@Override
 	public int hashCode () {
-		int result = getId () != null ? getId ().hashCode () : 0;
-		result = 31 * result + (getFirstName () != null ? getFirstName ().hashCode () : 0);
+		int result = getFirstName () != null ? getFirstName ().hashCode () : 0;
 		result = 31 * result + (getLastName () != null ? getLastName ().hashCode () : 0);
 		return result;
+	}
+
+	public ContactData ( String firstName, String middlename, String lastName, String group ) {
+		this.id = Integer.MAX_VALUE;
+		this.firstName = firstName;
+		this.middlename = middlename;
+		this.lastName = lastName;
+		this.group = group;
+	}
+	public String getGroup () {
+		return group;
 	}
 
 	@Override
@@ -57,7 +55,11 @@ public class ContactData {
 						'}';
 	}
 
-	public String getId () {
+	public void setId ( int id ) {
+		this.id = id;
+	}
+
+	public int getId () {
 		return id;
 	}
 
