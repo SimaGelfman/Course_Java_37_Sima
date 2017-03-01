@@ -10,6 +10,34 @@ public class ContactData {
 		return group;
 	}
 
+	@Override
+	public boolean equals ( Object o ) {
+		if (this == o) return true;
+		if (!(o instanceof ContactData)) return false;
+
+		ContactData that = (ContactData) o;
+
+		if (getFirstName () != null ? !getFirstName ().equals ( that.getFirstName () ) : that.getFirstName () != null)
+			return false;
+		return getLastName () != null ? getLastName ().equals ( that.getLastName () ) : that.getLastName () == null;
+
+	}
+
+	@Override
+	public int hashCode () {
+		int result = getFirstName () != null ? getFirstName ().hashCode () : 0;
+		result = 31 * result + (getLastName () != null ? getLastName ().hashCode () : 0);
+		return result;
+	}
+
+	@Override
+	public String toString () {
+		return "ContactData{" +
+						"firstName='" + firstName + '\'' +
+						", lastName='" + lastName + '\'' +
+						'}';
+	}
+
 	public ContactData ( String firstName, String middlename, String lastName, String group ) {
 		this.firstName = firstName;
 		this.middlename = middlename;
