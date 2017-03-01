@@ -1,11 +1,27 @@
 package com.gelfman.courseJava.adressbook.model;
 
 public class ContactData {
+	private final String id;
 	private final String firstName;
 	private final String middlename;
 	private final String lastName;
 	private String group;
 
+	public ContactData ( String id, String firstName, String middlename, String lastName, String group ) {
+		this.id = id;
+		this.firstName = firstName;
+		this.middlename = middlename;
+		this.lastName = lastName;
+		this.group = group;
+	}
+
+	public ContactData ( String firstName, String middlename, String lastName, String group ) {
+		this.id = null;
+		this.firstName = firstName;
+		this.middlename = middlename;
+		this.lastName = lastName;
+		this.group = group;
+	}
 	public String getGroup () {
 		return group;
 	}
@@ -17,6 +33,7 @@ public class ContactData {
 
 		ContactData that = (ContactData) o;
 
+		if (getId () != null ? !getId ().equals ( that.getId () ) : that.getId () != null) return false;
 		if (getFirstName () != null ? !getFirstName ().equals ( that.getFirstName () ) : that.getFirstName () != null)
 			return false;
 		return getLastName () != null ? getLastName ().equals ( that.getLastName () ) : that.getLastName () == null;
@@ -25,7 +42,8 @@ public class ContactData {
 
 	@Override
 	public int hashCode () {
-		int result = getFirstName () != null ? getFirstName ().hashCode () : 0;
+		int result = getId () != null ? getId ().hashCode () : 0;
+		result = 31 * result + (getFirstName () != null ? getFirstName ().hashCode () : 0);
 		result = 31 * result + (getLastName () != null ? getLastName ().hashCode () : 0);
 		return result;
 	}
@@ -33,16 +51,14 @@ public class ContactData {
 	@Override
 	public String toString () {
 		return "ContactData{" +
-						"firstName='" + firstName + '\'' +
+						"id='" + id + '\'' +
+						", firstName='" + firstName + '\'' +
 						", lastName='" + lastName + '\'' +
 						'}';
 	}
 
-	public ContactData ( String firstName, String middlename, String lastName, String group ) {
-		this.firstName = firstName;
-		this.middlename = middlename;
-		this.lastName = lastName;
-		this.group = group;
+	public String getId () {
+		return id;
 	}
 
 	public String getFirstName () {
