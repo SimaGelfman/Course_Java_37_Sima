@@ -2,6 +2,7 @@ package com.gelfman.courseJava.adressbook.tests;
 
 import com.gelfman.courseJava.adressbook.model.ContactData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
@@ -12,24 +13,26 @@ import java.util.List;
  */
 public class ContactDeletionTests extends TestBased {
 
-	@Test
-	public void testContactDeletion () {
-		app.getNavigationMamager ().goToHomePage ();
-		if (!app.getContactHelper ().isThereAContact ()) {
-			app.getContactHelper ().createContact ( new ContactData ( "Petor", "Ilich", "Sergeev", "test1" ) );
+	@BeforeMethod
+	public void ensurePrecondition () {
+		app.goTo ().homePage ();
+		if (app.contact ().list ().size () == 0) {
+			app.contact ().create ( new ContactData ( "Petor", "Ilich", "Sergeev", "test1" ) );
 		}
-		List<ContactData> before = app.getContactHelper ().getContactList();
-		app.getContactHelper ().selectSomeContact (before.size () - 1);
-		app.getContactHelper ().deleteSelectedContact ();
-		app.getNavigationMamager ().goToHomePage ();
-		List<ContactData> after = app.getContactHelper ().getContactList();
-		Assert.assertEquals ( before.size() - 1, after.size () );
-		before.remove ( before.size () - 1);
+	}
+
+	@Test(enabled = true)
+	public void testContactDeletion () {
+		List<ContactData> before = app.contact ().list ();
+		int index = before.size () - 1;
+		app.contact ().delete ( before , index);
+		List<ContactData> after = app.contact ().list ();
+		Assert.assertEquals ( before.size () - 1, after.size () );
+		before.remove ( index );
 		Comparator<? super ContactData> byId = ( c1, c2) -> Integer.compare ( c1.getId (), c2.getId () );
 		before.sort ( byId );
 		after.sort ( byId );
 		Assert.assertEquals ( before, after);
 	}
-
 
 }

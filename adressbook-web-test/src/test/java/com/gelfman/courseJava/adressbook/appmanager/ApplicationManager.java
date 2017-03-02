@@ -51,14 +51,14 @@ public class ApplicationManager {
 		wd.quit();
 	}
 
-	public GroupHelper getGroupHelper () {
+	public GroupHelper group () {
 		return groupHelper;
 	}
 
-	public NavigationMamager getNavigationMamager () {
+	public NavigationMamager goTo () {
 		return navigationMamager;
 	}
 
-	public ContactHelper getContactHelper(){
+	public ContactHelper contact (){
 		return contactHelper; }
 }
