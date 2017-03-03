@@ -60,14 +60,14 @@ public class ContactHelper extends HelperBased{
 		click(By.xpath ( "//input[@type = 'submit']" ));
 	}
 
-	public void createContact ( ContactData contact ) {
+	public void create ( ContactData contact ) {
 		initContactCreation ();
 		fillContactForm ( contact , true);
 		submitContactCreation ();
 		returnToHomePage ();
 	}
 
-	public void modifyContact ( int index, ContactData contact ) {
+	public void modify ( int index, ContactData contact ) {
 		initContactModification ( index );
 		fillContactForm ( contact, false );
 		submitContactModification ();
@@ -75,7 +75,7 @@ public class ContactHelper extends HelperBased{
 	}
 
 
-	public void deleteContact ( List<ContactData> before, int index ) {
+	public void delete ( List<ContactData> before, int index ) {
 		selectSomeContact (index);
 		deleteSelectedContact ();
 		returnToHomePage ();
@@ -91,14 +91,14 @@ public class ContactHelper extends HelperBased{
 		return wd.findElements ( By.xpath ( "//table[@id='maintable']/tbody/tr/td[1]/input" ) ).size ();
 	}
 
-	public List<ContactData> getContactList () {
+	public List<ContactData> list () {
 		List<ContactData> contacts = new ArrayList<ContactData> ();
 		List<WebElement> rowContact = wd.findElements ( By.xpath ( "//table[@id='maintable']//tr[td]" ) );
 		for(WebElement element: rowContact){
 			String lastname = element.findElement ( By.xpath ( "./td[2]" ) ).getText ();
 			String firstname = element.findElement ( By.xpath ( "./td[3]" ) ).getText ();
 			int id = Integer.parseInt ( element.findElement ( By.tagName ( "input" ) ).getAttribute ( "value" ));
-			contacts.add(new ContactData ( id, firstname, null, lastname, null ));
+			contacts.add(new ContactData ( ).withId ( id).withFirstName ( firstname).withLastName ( lastname));
 		}
 		return contacts;
 	}
