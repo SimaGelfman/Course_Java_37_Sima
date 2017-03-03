@@ -1,19 +1,11 @@
 package com.gelfman.courseJava.adressbook.model;
 
 public class ContactData {
-	private int id;
-	private final String firstName;
-	private final String middlename;
-	private final String lastName;
+	private int id = Integer.MAX_VALUE;
+	private String firstName;
+	private String middlename;
+	private String lastName;
 	private String group;
-
-	public ContactData ( int id, String firstName, String middlename, String lastName, String group ) {
-		this.id = id;
-		this.firstName = firstName;
-		this.middlename = middlename;
-		this.lastName = lastName;
-		this.group = group;
-	}
 
 	@Override
 	public boolean equals ( Object o ) {
@@ -35,13 +27,31 @@ public class ContactData {
 		return result;
 	}
 
-	public ContactData ( String firstName, String middlename, String lastName, String group ) {
-		this.id = Integer.MAX_VALUE;
+	public ContactData  withFirstName ( String firstName ) {
 		this.firstName = firstName;
-		this.middlename = middlename;
-		this.lastName = lastName;
-		this.group = group;
+		return this;
 	}
+
+	public ContactData  withMiddlename ( String middlename ) {
+		this.middlename = middlename;
+		return this;
+	}
+
+	public ContactData  withLastName ( String lastName ) {
+		this.lastName = lastName;
+		return this;
+	}
+
+	public ContactData  withGroup ( String group ) {
+		this.group = group;
+		return this;
+	}
+
+	public ContactData  withId ( int id ) {
+		this.id = id;
+		return this;
+	}
+
 	public String getGroup () {
 		return group;
 	}
@@ -55,9 +65,7 @@ public class ContactData {
 						'}';
 	}
 
-	public void setId ( int id ) {
-		this.id = id;
-	}
+
 
 	public int getId () {
 		return id;
@@ -74,6 +82,4 @@ public class ContactData {
 	public String getLastName () {
 		return lastName;
 	}
-
-
 }
