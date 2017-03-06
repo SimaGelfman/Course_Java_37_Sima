@@ -30,23 +30,23 @@ public class GroupData {
 						'}';
 	}
 
-	public GroupData  withId ( int id ) {
+	public GroupData withId ( int id ) {
 		this.id = id;
 		return this;
 	}
 
 
-	public GroupData  withName ( String groupName ) {
+	public GroupData withName ( String groupName ) {
 		this.groupName = groupName;
 		return this;
 	}
 
-	public GroupData  withHeader ( String header ) {
+	public GroupData withHeader ( String header ) {
 		this.header = header;
 		return this;
 	}
 
-	public GroupData  withFooter ( String footer ) {
+	public GroupData withFooter ( String footer ) {
 		this.footer = footer;
 		return this;
 	}

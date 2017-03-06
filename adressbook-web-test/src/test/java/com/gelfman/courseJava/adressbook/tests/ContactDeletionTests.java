@@ -17,8 +17,8 @@ public class ContactDeletionTests extends TestBased {
 	public void ensurePrecondition () {
 		app.goTo ().homePage ();
 		if (app.contact ().list ().size () == 0) {
-			app.contact ().create ( new ContactData ( )
-							.withFirstName ( "Petor").withMiddlename (  "Ilich").withLastName ( "Sergeev").withGroup ( "test1" ) );
+			app.contact ().create ( new ContactData ()
+							.withFirstName ( "Petor" ).withMiddlename ( "Ilich" ).withLastName ( "Sergeev" ).withGroup ( "test1" ) );
 		}
 	}
 
@@ -26,14 +26,14 @@ public class ContactDeletionTests extends TestBased {
 	public void testContactDeletion () {
 		List<ContactData> before = app.contact ().list ();
 		int index = before.size () - 1;
-		app.contact ().delete ( before , index);
+		app.contact ().delete ( before, index );
 		List<ContactData> after = app.contact ().list ();
 		Assert.assertEquals ( before.size () - 1, after.size () );
 		before.remove ( index );
-		Comparator<? super ContactData> byId = ( c1, c2) -> Integer.compare ( c1.getId (), c2.getId () );
+		Comparator<? super ContactData> byId = ( c1, c2 ) -> Integer.compare ( c1.getId (), c2.getId () );
 		before.sort ( byId );
 		after.sort ( byId );
-		Assert.assertEquals ( before, after);
+		Assert.assertEquals ( before, after );
 	}
 
 }

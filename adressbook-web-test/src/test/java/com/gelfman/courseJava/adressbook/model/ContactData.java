@@ -27,27 +27,27 @@ public class ContactData {
 		return result;
 	}
 
-	public ContactData  withFirstName ( String firstName ) {
+	public ContactData withFirstName ( String firstName ) {
 		this.firstName = firstName;
 		return this;
 	}
 
-	public ContactData  withMiddlename ( String middlename ) {
+	public ContactData withMiddlename ( String middlename ) {
 		this.middlename = middlename;
 		return this;
 	}
 
-	public ContactData  withLastName ( String lastName ) {
+	public ContactData withLastName ( String lastName ) {
 		this.lastName = lastName;
 		return this;
 	}
 
-	public ContactData  withGroup ( String group ) {
+	public ContactData withGroup ( String group ) {
 		this.group = group;
 		return this;
 	}
 
-	public ContactData  withId ( int id ) {
+	public ContactData withId ( int id ) {
 		this.id = id;
 		return this;
 	}
@@ -64,7 +64,6 @@ public class ContactData {
 						", lastName='" + lastName + '\'' +
 						'}';
 	}
-
 
 
 	public int getId () {
