@@ -3,9 +3,12 @@ package com.gelfman.courseJava.adressbook.appmanager;
 import com.gelfman.courseJava.adressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sima.Gelfman on 2/12/2017.
@@ -64,6 +67,21 @@ public class ContactHelper extends HelperBased{
 		returnToHomePage ();
 	}
 
+	public void modifyContact ( int index, ContactData contact ) {
+		initContactModification ( index );
+		fillContactForm ( contact, false );
+		submitContactModification ();
+		returnToHomePage ();
+	}
+
+
+	public void deleteContact ( List<ContactData> before, int index ) {
+		selectSomeContact (index);
+		deleteSelectedContact ();
+		returnToHomePage ();
+	}
+
+
 
 	public boolean isThereAContact () {
 		return isElementPresent(By.name ( "selected[]" ));
@@ -71,5 +89,17 @@ public class ContactHelper extends HelperBased{
 
 	public int getContactCount () {
 		return wd.findElements ( By.xpath ( "//table[@id='maintable']/tbody/tr/td[1]/input" ) ).size ();
+	}
+
+	public List<ContactData> getContactList () {
+		List<ContactData> contacts = new ArrayList<ContactData> ();
+		List<WebElement> rowContact = wd.findElements ( By.xpath ( "//table[@id='maintable']//tr[td]" ) );
+		for(WebElement element: rowContact){
+			String lastname = element.findElement ( By.xpath ( "./td[2]" ) ).getText ();
+			String firstname = element.findElement ( By.xpath ( "./td[3]" ) ).getText ();
+			int id = Integer.parseInt ( element.findElement ( By.tagName ( "input" ) ).getAttribute ( "value" ));
+			contacts.add(new ContactData ( id, firstname, null, lastname, null ));
+		}
+		return contacts;
 	}
 }
