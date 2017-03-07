@@ -8,7 +8,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Sima.Gelfman on 2/12/2017.
@@ -43,8 +45,8 @@ public class ContactHelper extends HelperBased {
 		click ( By.linkText ( "add new" ) );
 	}
 
-	public void selectSomeContact ( int index ) {
-		wd.findElements ( By.xpath ( "//table[@id='maintable']/tbody/tr/td[1]/input" ) ).get ( index ).click ();
+	public void selectSomeContactById ( int id ) {
+		wd.findElement ( By.xpath ( "//table[@id='maintable']/tbody/tr/td[1]/input[@id='" + id + "']" ) ).click ();
 	}
 
 	public void deleteSelectedContact () {
@@ -52,8 +54,8 @@ public class ContactHelper extends HelperBased {
 		closeAlertWindow ();
 	}
 
-	public void initContactModification ( int index ) {
-		wd.findElements ( By.xpath ( "//table[@id='maintable']/tbody/tr/td[8]/a/img" ) ).get ( index ).click ();
+	public void initContactModificationById ( int id ) {
+		wd.findElement ( By.xpath ( "//table[@id='maintable']/tbody/tr/td[8]/a[contains(@href, '"+ id + "')]" ) ).click ();
 	}
 
 	public void submitContactModification () {
@@ -67,16 +69,16 @@ public class ContactHelper extends HelperBased {
 		returnToHomePage ();
 	}
 
-	public void modify ( int index, ContactData contact ) {
-		initContactModification ( index );
+	public void modify (  ContactData contact ) {
+		initContactModificationById ( contact.getId () );
 		fillContactForm ( contact, false );
 		submitContactModification ();
 		returnToHomePage ();
 	}
 
 
-	public void delete ( List<ContactData> before, int index ) {
-		selectSomeContact ( index );
+	public void delete ( ContactData contact) {
+		selectSomeContactById ( contact.getId () );
 		deleteSelectedContact ();
 		returnToHomePage ();
 	}
@@ -92,6 +94,19 @@ public class ContactHelper extends HelperBased {
 
 	public List<ContactData> list () {
 		List<ContactData> contacts = new ArrayList<ContactData> ();
+		List<WebElement> rowContact = wd.findElements ( By.xpath ( "//table[@id='maintable']//tr[td]" ) );
+		for (WebElement element : rowContact) {
+			String lastname = element.findElement ( By.xpath ( "./td[2]" ) ).getText ();
+			String firstname = element.findElement ( By.xpath ( "./td[3]" ) ).getText ();
+			int id = Integer.parseInt ( element.findElement ( By.tagName ( "input" ) ).getAttribute ( "value" ) );
+			contacts.add ( new ContactData ().withId ( id ).withFirstName ( firstname ).withLastName ( lastname ) );
+		}
+		return contacts;
+	}
+
+	public Set<ContactData> all () {
+
+		Set<ContactData> contacts = new HashSet<ContactData> ();
 		List<WebElement> rowContact = wd.findElements ( By.xpath ( "//table[@id='maintable']//tr[td]" ) );
 		for (WebElement element : rowContact) {
 			String lastname = element.findElement ( By.xpath ( "./td[2]" ) ).getText ();

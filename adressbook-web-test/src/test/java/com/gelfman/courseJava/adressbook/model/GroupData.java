@@ -7,22 +7,6 @@ public class GroupData {
 	private String footer;
 
 	@Override
-	public boolean equals ( Object o ) {
-		if (this == o) return true;
-		if (!(o instanceof GroupData)) return false;
-
-		GroupData groupData = (GroupData) o;
-
-		return getGroupName () != null ? getGroupName ().equals ( groupData.getGroupName () ) : groupData.getGroupName () == null;
-
-	}
-
-	@Override
-	public int hashCode () {
-		return getGroupName () != null ? getGroupName ().hashCode () : 0;
-	}
-
-	@Override
 	public String toString () {
 		return "GroupData{" +
 						"id=" + id +
@@ -56,6 +40,24 @@ public class GroupData {
 		return id;
 	}
 
+	@Override
+	public boolean equals ( Object o ) {
+		if (this == o) return true;
+		if (!(o instanceof GroupData)) return false;
+
+		GroupData groupData = (GroupData) o;
+
+		if (getId () != groupData.getId ()) return false;
+		return getGroupName () != null ? getGroupName ().equals ( groupData.getGroupName () ) : groupData.getGroupName () == null;
+
+	}
+
+	@Override
+	public int hashCode () {
+		int result = getId ();
+		result = 31 * result + (getGroupName () != null ? getGroupName ().hashCode () : 0);
+		return result;
+	}
 
 	public String getGroupName () {
 		return groupName;

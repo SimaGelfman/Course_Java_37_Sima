@@ -7,26 +7,6 @@ public class ContactData {
 	private String lastName;
 	private String group;
 
-	@Override
-	public boolean equals ( Object o ) {
-		if (this == o) return true;
-		if (!(o instanceof ContactData)) return false;
-
-		ContactData that = (ContactData) o;
-
-		if (getFirstName () != null ? !getFirstName ().equals ( that.getFirstName () ) : that.getFirstName () != null)
-			return false;
-		return getLastName () != null ? getLastName ().equals ( that.getLastName () ) : that.getLastName () == null;
-
-	}
-
-	@Override
-	public int hashCode () {
-		int result = getFirstName () != null ? getFirstName ().hashCode () : 0;
-		result = 31 * result + (getLastName () != null ? getLastName ().hashCode () : 0);
-		return result;
-	}
-
 	public ContactData withFirstName ( String firstName ) {
 		this.firstName = firstName;
 		return this;
@@ -76,6 +56,28 @@ public class ContactData {
 
 	public String getMiddlename () {
 		return middlename;
+	}
+
+	@Override
+	public boolean equals ( Object o ) {
+		if (this == o) return true;
+		if (!(o instanceof ContactData)) return false;
+
+		ContactData that = (ContactData) o;
+
+		if (getId () != that.getId ()) return false;
+		if (getFirstName () != null ? !getFirstName ().equals ( that.getFirstName () ) : that.getFirstName () != null)
+			return false;
+		return getLastName () != null ? getLastName ().equals ( that.getLastName () ) : that.getLastName () == null;
+
+	}
+
+	@Override
+	public int hashCode () {
+		int result = getId ();
+		result = 31 * result + (getFirstName () != null ? getFirstName ().hashCode () : 0);
+		result = 31 * result + (getLastName () != null ? getLastName ().hashCode () : 0);
+		return result;
 	}
 
 	public String getLastName () {

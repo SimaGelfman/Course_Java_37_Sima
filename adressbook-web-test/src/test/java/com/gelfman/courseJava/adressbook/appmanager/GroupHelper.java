@@ -1,13 +1,16 @@
 package com.gelfman.courseJava.adressbook.appmanager;
 
 import com.gelfman.courseJava.adressbook.model.GroupData;
+import com.gelfman.courseJava.adressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Sima.Gelfman on 2/9/2017.
@@ -59,8 +62,8 @@ public class GroupHelper extends HelperBased {
 		returnToGroupPage ();
 	}
 
-	public void modify ( int index, GroupData group ) {
-		selectGroup ( index );
+	public void modify (  GroupData group ) {
+		selectGroupById (group.getId () );
 		initGroupModification ();
 		fillGroupForm ( group );
 		submitGroupModification ();
@@ -91,5 +94,28 @@ public class GroupHelper extends HelperBased {
 			groups.add ( new GroupData ().withId ( id ).withName ( name ) );
 		}
 		return groups;
+	}
+
+
+	public Groups all () {
+		Groups groups = new Groups ();
+		List<WebElement> elements = wd.findElements ( By.cssSelector ( "span.group" ) );
+		for (WebElement element : elements) {
+			String name = element.getText ();
+			int id = Integer.parseInt ( element.findElement ( By.tagName ( "input" ) ).getAttribute ( "value" ) );
+			groups.add ( new GroupData ().withId ( id ).withName ( name ) );
+		}
+		return groups;
+	}
+
+	public void delete ( GroupData group ) {
+		selectGroupById ( group.getId () );
+		deleteSelectedGroups ();
+		returnToGroupPage ();
+
+	}
+
+	private void selectGroupById ( int id ) {
+		wd.findElement ( By.cssSelector ( "input[value='" + id + "']" ) ).click ();
 	}
 }
