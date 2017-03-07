@@ -1,20 +1,20 @@
 package com.gelfman.courseJava.adressbook.tests;
 
 import com.gelfman.courseJava.adressbook.model.GroupData;
-import org.testng.Assert;
+import com.gelfman.courseJava.adressbook.model.Groups;
+import org.hamcrest.CoreMatchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class GroupDeletionTests extends TestBased {
 
 	@BeforeMethod
 	public void ensurePreconditions () {
 		app.goTo ().groupPage ();
-		if (app.group ().list ().size () == 0) {
+		if (app.group ().all ().size () == 0) {
 			app.group ().create ( new GroupData ().withName ( "test1" ).withHeader ( "test1" ).withFooter ( "test3" ) );
 		}
 	}
@@ -22,13 +22,12 @@ public class GroupDeletionTests extends TestBased {
 
 	@Test
 	public void testGroupDeletion () {
-		Set<GroupData> before = app.group ().all();
+		Groups before = app.group ().all ();
 		GroupData deletedGroup = before.iterator ().next ();
 		app.group ().delete ( deletedGroup );
-		Set<GroupData> after = app.group ().all ();
-		Assert.assertEquals ( after.size (), before.size () - 1 );
-		before.remove ( deletedGroup );
-		Assert.assertEquals ( before, after );
+		Groups after = app.group ().all ();
+		assertEquals ( after.size (), before.size () - 1 );
+		assertThat ( after, CoreMatchers.equalTo ( before.without ( deletedGroup ) ) );
 	}
 
 

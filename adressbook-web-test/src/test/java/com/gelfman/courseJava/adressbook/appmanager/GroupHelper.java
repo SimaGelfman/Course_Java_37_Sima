@@ -5,12 +5,8 @@ import com.gelfman.courseJava.adressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Sima.Gelfman on 2/9/2017.
@@ -70,13 +66,6 @@ public class GroupHelper extends HelperBased {
 		returnToGroupPage ();
 	}
 
-	public void delete ( int index ) {
-		selectGroup ( index );
-		deleteSelectedGroups ();
-		returnToGroupPage ();
-	}
-
-
 	public boolean isThereAGroup () {
 		return isElementPresent ( By.name ( "selected[]" ) );
 	}
@@ -84,18 +73,6 @@ public class GroupHelper extends HelperBased {
 	public int getGroupCount () {
 		return wd.findElements ( By.name ( "selected[]" ) ).size ();
 	}
-
-	public List<GroupData> list () {
-		List<GroupData> groups = new ArrayList<GroupData> ();
-		List<WebElement> elements = wd.findElements ( By.cssSelector ( "span.group" ) );
-		for (WebElement element : elements) {
-			String name = element.getText ();
-			int id = Integer.parseInt ( element.findElement ( By.tagName ( "input" ) ).getAttribute ( "value" ) );
-			groups.add ( new GroupData ().withId ( id ).withName ( name ) );
-		}
-		return groups;
-	}
-
 
 	public Groups all () {
 		Groups groups = new Groups ();

@@ -1,6 +1,7 @@
 package com.gelfman.courseJava.adressbook.appmanager;
 
 import com.gelfman.courseJava.adressbook.model.ContactData;
+import com.gelfman.courseJava.adressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -84,13 +85,6 @@ public class ContactHelper extends HelperBased {
 	}
 
 
-	public boolean isThereAContact () {
-		return isElementPresent ( By.name ( "selected[]" ) );
-	}
-
-	public int getContactCount () {
-		return wd.findElements ( By.xpath ( "//table[@id='maintable']/tbody/tr/td[1]/input" ) ).size ();
-	}
 
 	public List<ContactData> list () {
 		List<ContactData> contacts = new ArrayList<ContactData> ();
@@ -104,9 +98,8 @@ public class ContactHelper extends HelperBased {
 		return contacts;
 	}
 
-	public Set<ContactData> all () {
-
-		Set<ContactData> contacts = new HashSet<ContactData> ();
+	public Contacts all () {
+		Contacts contacts = new Contacts ();
 		List<WebElement> rowContact = wd.findElements ( By.xpath ( "//table[@id='maintable']//tr[td]" ) );
 		for (WebElement element : rowContact) {
 			String lastname = element.findElement ( By.xpath ( "./td[2]" ) ).getText ();
