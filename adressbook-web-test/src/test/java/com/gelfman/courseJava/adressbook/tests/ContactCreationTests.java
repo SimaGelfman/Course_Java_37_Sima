@@ -15,11 +15,10 @@ public class ContactCreationTests extends TestBased {
 		app.goTo ().homePage ();
 		Contacts before = app.contact ().all ();
 		ContactData contact = new ContactData ()
-						.withFirstName ( "Dron" ).withMiddlename ( "Antonovch" ).withLastName ( "Tarabarov" ).withGroup ( "test1" );
+							.withFirstName ( "Dron"  ).withMiddlename ( "Antonovch" ).withLastName ( "Tarabarov" ).withGroup ( "test1" );
 		app.contact ().create ( contact );
+		assertEquals ( app.contact ().count (), before.size () + 1 );
 		Contacts after = app.contact ().all ();
-		assertEquals ( after.size (), before.size () + 1 );
-		contact.withId ( after.stream ().mapToInt ( ( c ) -> c.getId () ).max ().getAsInt () );
 		assertThat ( after, equalTo
 						( before.withAdded ( contact.withId ( after.stream ().mapToInt ( ( c ) -> c.getId () ).max ().getAsInt () ) ) ) );
 	}

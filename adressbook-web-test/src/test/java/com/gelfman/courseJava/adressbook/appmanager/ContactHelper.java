@@ -18,6 +18,7 @@ import java.util.Set;
  */
 public class ContactHelper extends HelperBased {
 
+	private Contacts contactsCash = null;
 
 	public ContactHelper ( WebDriver wd ) {
 		super ( wd );
@@ -25,6 +26,10 @@ public class ContactHelper extends HelperBased {
 
 	public void returnToHomePage () {
 		click ( By.linkText ( "home" ) );
+	}
+
+	public int count(){
+   return wd.findElements ( By.xpath ( "//td/input" ) ).size ();
 	}
 
 	public void submitContactCreation () {
@@ -67,6 +72,7 @@ public class ContactHelper extends HelperBased {
 		initContactCreation ();
 		fillContactForm ( contact, true );
 		submitContactCreation ();
+		contactsCash = null;
 		returnToHomePage ();
 	}
 
@@ -74,6 +80,7 @@ public class ContactHelper extends HelperBased {
 		initContactModificationById ( contact.getId () );
 		fillContactForm ( contact, false );
 		submitContactModification ();
+		contactsCash = null;
 		returnToHomePage ();
 	}
 
@@ -81,32 +88,23 @@ public class ContactHelper extends HelperBased {
 	public void delete ( ContactData contact) {
 		selectSomeContactById ( contact.getId () );
 		deleteSelectedContact ();
+		contactsCash = null;
 		returnToHomePage ();
 	}
 
 
-
-	public List<ContactData> list () {
-		List<ContactData> contacts = new ArrayList<ContactData> ();
-		List<WebElement> rowContact = wd.findElements ( By.xpath ( "//table[@id='maintable']//tr[td]" ) );
-		for (WebElement element : rowContact) {
-			String lastname = element.findElement ( By.xpath ( "./td[2]" ) ).getText ();
-			String firstname = element.findElement ( By.xpath ( "./td[3]" ) ).getText ();
-			int id = Integer.parseInt ( element.findElement ( By.tagName ( "input" ) ).getAttribute ( "value" ) );
-			contacts.add ( new ContactData ().withId ( id ).withFirstName ( firstname ).withLastName ( lastname ) );
-		}
-		return contacts;
-	}
-
 	public Contacts all () {
-		Contacts contacts = new Contacts ();
+		if(contactsCash != null){
+			return new Contacts ( contactsCash );
+		}
+		contactsCash = new Contacts ();
 		List<WebElement> rowContact = wd.findElements ( By.xpath ( "//table[@id='maintable']//tr[td]" ) );
 		for (WebElement element : rowContact) {
 			String lastname = element.findElement ( By.xpath ( "./td[2]" ) ).getText ();
 			String firstname = element.findElement ( By.xpath ( "./td[3]" ) ).getText ();
 			int id = Integer.parseInt ( element.findElement ( By.tagName ( "input" ) ).getAttribute ( "value" ) );
-			contacts.add ( new ContactData ().withId ( id ).withFirstName ( firstname ).withLastName ( lastname ) );
+			contactsCash.add ( new ContactData ().withId ( id ).withFirstName ( firstname ).withLastName ( lastname ) );
 		}
-		return contacts;
+		return contactsCash;
 	}
 }
