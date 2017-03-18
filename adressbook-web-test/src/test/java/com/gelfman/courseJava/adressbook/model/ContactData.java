@@ -5,7 +5,27 @@ public class ContactData {
 	private String firstName;
 	private String middlename;
 	private String lastName;
+	private String homePhone;
+	private String mobilePhone;
+	private String workPhone;
+	private String allPhones;
 	private String group;
+
+	public ContactData withHomePhone ( String homePhone ) {
+		this.homePhone = homePhone;
+		return this;
+	}
+
+	public ContactData withMobilePhone ( String mobilePhone ) {
+		this.mobilePhone = mobilePhone;
+		return this;
+	}
+
+	public ContactData withWorkPhone ( String workPhone ) {
+		this.workPhone = workPhone;
+		return this;
+	}
+
 
 	public ContactData withFirstName ( String firstName ) {
 		this.firstName = firstName;
@@ -36,6 +56,15 @@ public class ContactData {
 		return group;
 	}
 
+	public ContactData withAllPhones ( String allPhones ) {
+		this.allPhones = allPhones;
+		return this;
+	}
+
+	public String getAllPhones () {
+		return allPhones;
+	}
+
 	@Override
 	public String toString () {
 		return "ContactData{" +
@@ -56,6 +85,18 @@ public class ContactData {
 
 	public String getMiddlename () {
 		return middlename;
+	}
+
+	public String getHomePhone () {
+		return homePhone;
+	}
+
+	public String getMobilePhone () {
+		return mobilePhone;
+	}
+
+	public String getWorkPhone () {
+		return workPhone;
 	}
 
 	@Override

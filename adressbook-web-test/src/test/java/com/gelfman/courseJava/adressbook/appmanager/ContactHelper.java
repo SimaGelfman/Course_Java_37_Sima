@@ -8,10 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Sima.Gelfman on 2/12/2017.
@@ -51,7 +48,7 @@ public class ContactHelper extends HelperBased {
 		click ( By.linkText ( "add new" ) );
 	}
 
-	public void selectSomeContactById ( int id ) {
+	public void selectContactById ( int id ) {
 		wd.findElement ( By.xpath ( "//table[@id='maintable']/tbody/tr/td[1]/input[@id='" + id + "']" ) ).click ();
 	}
 
@@ -66,6 +63,18 @@ public class ContactHelper extends HelperBased {
 
 	public void submitContactModification () {
 		click ( By.xpath ( "//input[@type = 'submit']" ) );
+	}
+
+	public ContactData infoFromEditForm(ContactData contact){
+		initContactModificationById ( contact.getId () );
+		String firstName = wd.findElement ( By.name ( "firstname" ) ).getAttribute ( "value" );
+		String lastName = wd.findElement ( By.name ( "lastname" ) ).getAttribute ( "value" );
+		String homePhone = wd.findElement ( By.name ( "home" ) ).getAttribute ( "value" );
+		String mobilePhone = wd.findElement ( By.name ( "mobile" ) ).getAttribute ( "value" );
+		String workPhone = wd.findElement ( By.name ( "work" ) ).getAttribute ( "value" );
+		wd.navigate ().back ();
+		return new ContactData ().withId ( contact.getId () ).withFirstName ( firstName ).withLastName ( lastName )
+						.withHomePhone ( homePhone ).withMobilePhone ( mobilePhone ).withWorkPhone ( workPhone );
 	}
 
 	public void create ( ContactData contact ) {
@@ -86,7 +95,7 @@ public class ContactHelper extends HelperBased {
 
 
 	public void delete ( ContactData contact) {
-		selectSomeContactById ( contact.getId () );
+		selectContactById ( contact.getId () );
 		deleteSelectedContact ();
 		contactsCash = null;
 		returnToHomePage ();
@@ -103,7 +112,9 @@ public class ContactHelper extends HelperBased {
 			String lastname = element.findElement ( By.xpath ( "./td[2]" ) ).getText ();
 			String firstname = element.findElement ( By.xpath ( "./td[3]" ) ).getText ();
 			int id = Integer.parseInt ( element.findElement ( By.tagName ( "input" ) ).getAttribute ( "value" ) );
-			contactsCash.add ( new ContactData ().withId ( id ).withFirstName ( firstname ).withLastName ( lastname ) );
+			String allPhones = element.findElement ( By.xpath ("./td[5]"  ) ).getText ();
+			contactsCash.add ( new ContactData ().withId ( id ).withFirstName ( firstname ).withLastName ( lastname ) .withAllPhones ( allPhones ));
+
 		}
 		return contactsCash;
 	}
