@@ -37,6 +37,7 @@ public class ContactHelper extends HelperBased {
 		type ( By.name ( "firstname" ), contact.getFirstName () );
 		type ( By.name ( "middlename" ), contact.getMiddlename () );
 		type ( By.name ( "lastname" ), contact.getLastName () );
+		type ( By.name ( "address" ) ,contact.getAddress ());
 		if (creation) {
 			new Select ( wd.findElement ( By.name ( "new_group" ) ) ).selectByVisibleText ( contact.getGroup () );
 		} else {
