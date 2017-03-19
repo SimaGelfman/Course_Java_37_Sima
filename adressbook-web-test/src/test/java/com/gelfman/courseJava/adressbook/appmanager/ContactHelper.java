@@ -38,6 +38,9 @@ public class ContactHelper extends HelperBased {
 		type ( By.name ( "middlename" ), contact.getMiddlename () );
 		type ( By.name ( "lastname" ), contact.getLastName () );
 		type ( By.name ( "address" ) ,contact.getAddress ());
+		type(By.name("email"), contact.getEmail1 ());
+		type ( By.name ( "email2" ),contact.getEmail2 () );
+		type(By.name ( "email3" ), contact.getEmail3 ());
 		if (creation) {
 			new Select ( wd.findElement ( By.name ( "new_group" ) ) ).selectByVisibleText ( contact.getGroup () );
 		} else {
@@ -74,9 +77,13 @@ public class ContactHelper extends HelperBased {
 		String homePhone = wd.findElement ( By.name ( "home" ) ).getAttribute ( "value" );
 		String mobilePhone = wd.findElement ( By.name ( "mobile" ) ).getAttribute ( "value" );
 		String workPhone = wd.findElement ( By.name ( "work" ) ).getAttribute ( "value" );
+		String email1 = wd.findElement ( By.name("email") ).getAttribute ( "value" );
+		String email2 = wd.findElement ( By.name("email2") ).getAttribute ( "value" );
+		String email3 = wd.findElement ( By.name("email3") ).getAttribute ( "value" );
 		wd.navigate ().back ();
 		return new ContactData ().withId ( contact.getId () ).withFirstName ( firstName ).withLastName ( lastName ).withAddress ( address )
-						.withHomePhone ( homePhone ).withMobilePhone ( mobilePhone ).withWorkPhone ( workPhone );
+						.withHomePhone ( homePhone ).withMobilePhone ( mobilePhone ).withWorkPhone ( workPhone )
+						.withEmail1 ( email1 ).withEmail2 ( email2 ).withEmail3 ( email3 );
 	}
 
 	public void create ( ContactData contact ) {
@@ -116,8 +123,9 @@ public class ContactHelper extends HelperBased {
 			int id = Integer.parseInt ( element.findElement ( By.tagName ( "input" ) ).getAttribute ( "value" ) );
 			String allPhones = element.findElement ( By.xpath ("./td[6]"  ) ).getText ();
 			String address = element.findElement ( By.xpath ( "./td[4]" ) ).getText ();
+			String allEmails = element.findElement ( By.xpath ( ("./td[5]") ) ).getText ();
 			contactsCash.add ( new ContactData ().withId ( id ).withFirstName ( firstname )
-							.withLastName ( lastname ).withAddress ( address ) .withAllPhones ( allPhones ));
+							.withLastName ( lastname ).withAddress ( address ) .withAllPhones ( allPhones ).withAllEmails ( allEmails ));
 
 		}
 		return contactsCash;
