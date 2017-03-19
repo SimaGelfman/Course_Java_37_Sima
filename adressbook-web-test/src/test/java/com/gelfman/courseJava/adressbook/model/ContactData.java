@@ -5,6 +5,7 @@ public class ContactData {
 	private String firstName;
 	private String middlename;
 	private String lastName;
+	private String address;
 	private String homePhone;
 	private String mobilePhone;
 	private String workPhone;
@@ -47,9 +48,17 @@ public class ContactData {
 		return this;
 	}
 
+	public void setAddress ( String address ) {
+		this.address = address;
+	}
+
 	public ContactData withId ( int id ) {
 		this.id = id;
 		return this;
+	}
+
+	public String getAddress () {
+		return address;
 	}
 
 	public String getGroup () {
@@ -58,6 +67,11 @@ public class ContactData {
 
 	public ContactData withAllPhones ( String allPhones ) {
 		this.allPhones = allPhones;
+		return this;
+	}
+
+	public ContactData withAddress ( String address ) {
+		this.address = address;
 		return this;
 	}
 

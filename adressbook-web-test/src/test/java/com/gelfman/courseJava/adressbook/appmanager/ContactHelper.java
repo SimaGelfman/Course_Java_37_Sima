@@ -69,11 +69,12 @@ public class ContactHelper extends HelperBased {
 		initContactModificationById ( contact.getId () );
 		String firstName = wd.findElement ( By.name ( "firstname" ) ).getAttribute ( "value" );
 		String lastName = wd.findElement ( By.name ( "lastname" ) ).getAttribute ( "value" );
+		String address = wd.findElement ( By.name("address") ).getText();
 		String homePhone = wd.findElement ( By.name ( "home" ) ).getAttribute ( "value" );
 		String mobilePhone = wd.findElement ( By.name ( "mobile" ) ).getAttribute ( "value" );
 		String workPhone = wd.findElement ( By.name ( "work" ) ).getAttribute ( "value" );
 		wd.navigate ().back ();
-		return new ContactData ().withId ( contact.getId () ).withFirstName ( firstName ).withLastName ( lastName )
+		return new ContactData ().withId ( contact.getId () ).withFirstName ( firstName ).withLastName ( lastName ).withAddress ( address )
 						.withHomePhone ( homePhone ).withMobilePhone ( mobilePhone ).withWorkPhone ( workPhone );
 	}
 
@@ -112,8 +113,10 @@ public class ContactHelper extends HelperBased {
 			String lastname = element.findElement ( By.xpath ( "./td[2]" ) ).getText ();
 			String firstname = element.findElement ( By.xpath ( "./td[3]" ) ).getText ();
 			int id = Integer.parseInt ( element.findElement ( By.tagName ( "input" ) ).getAttribute ( "value" ) );
-			String allPhones = element.findElement ( By.xpath ("./td[5]"  ) ).getText ();
-			contactsCash.add ( new ContactData ().withId ( id ).withFirstName ( firstname ).withLastName ( lastname ) .withAllPhones ( allPhones ));
+			String allPhones = element.findElement ( By.xpath ("./td[6]"  ) ).getText ();
+			String address = element.findElement ( By.xpath ( "./td[4]" ) ).getText ();
+			contactsCash.add ( new ContactData ().withId ( id ).withFirstName ( firstname )
+							.withLastName ( lastname ).withAddress ( address ) .withAllPhones ( allPhones ));
 
 		}
 		return contactsCash;
