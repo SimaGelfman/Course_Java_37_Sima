@@ -130,4 +130,10 @@ public class ContactHelper extends HelperBased {
 		}
 		return contactsCash;
 	}
+
+
+	public String details ( int id){
+		click ( By.xpath ("//table[@id='maintable']/tbody/tr/td[7]/a[contains(@href, '"+ id + "')]" ) );
+		return wd.findElement ( By.id ( "content" ) ).getText ();
+	}
 }

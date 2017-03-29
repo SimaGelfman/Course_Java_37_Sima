@@ -20,7 +20,7 @@ public class ContactEmailsTests extends TestBased {
 		if (app.contact ().all ().size () == 0) {
 			app.contact ().create ( new ContactData ()
 							.withFirstName ( "Petor" ).withMiddlename ( "Ilich" ).withLastName ( "Sergeev" )
-							.withGroup ( "test1" )
+							.withGroup ( "[none]" )
 							.withAddress ( "Rushian, Novosibirsk Town, Kirovo avenue,13, Apt 39, 656709" )
 							.withHomePhone ( "+7 975 00 99" ).withMobilePhone ( "05412345678" ).withWorkPhone ( "+ 675 - 987 - 1234" )
 							.withEmail1 ( "email1@yandex.ru" ).withEmail2 ( "email-email1.email1@gmail.com" ).withEmail3 ( "   Email1334@gmail.com" ) );
